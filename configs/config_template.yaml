@@ -1,0 +1,105 @@
+#----------------------------------------------------------------------------------------
+#################### ESSENTIAL SETTINGS ####################
+#----------------------------------------------------------------------------------------
+run_name: "test_run" # name to identify the run, results will be saved under results_run_name
+path_data_folder: "data" # path to the directory to save the data (the texts, raw or processed)
+path_texts_entropy_calculation: "" # If you have to calculate the entropy of terms for triplet filtering, put the path here to the corpus that is used for the calculation
+path_raw_pdf: "data/target_papers" # path to the directory with the raw pdfs (the target papers or other documents), for the armasuisse cluster, you can set path_raw_pdf = [[months], [years]], e.g. [[10], [21]] for October 2021
+path_fewshot_examples: "data/fewshot_examples/fewshotsamples_nlp.json" # Path to the few-shot examples, should already be correct if you did not move the file
+path_metadata: "data/arxiv-metadata-oai-snapshot.json" # path to the metadata, should be a .json file    
+path_memory_estimate: "" # path to the memory estimation file
+
+#----------------------------------------------------------------------------------------
+#################### OPTIONAL SETTINGS ####################
+#----------------------------------------------------------------------------------------
+
+#################### GENERAL SETTINGS ####################
+### SEED ###
+seed: 42 # seed for the random number generators
+verbose: true # if verbose is False, only warnings, errors and critical messages are shown
+clear_before_run: false # DANGER ZONE: if you want to clear all results in the folders before running, put to True.
+
+#################### LOGGING ####################
+logging_level_cmd: INFO # logging level
+logging_level_file: DEBUG # logging level
+
+#################### DATA LOADING ####################
+inverse: false # put to true if you want to remove categories instead of keeping them
+subset: null # if you want to process only a subset of the pdfs, put the number or fraction here. Otherwise put None
+filter_categories: false # if you want to filter based on the categories, put to True
+filter_by_version: false # whether to keep only the newest version of each paper
+categories: []
+
+filter_for_terms_in_abstract: false # if you want to filter for terms in the abstract
+terms_to_filter_for: [] # terms to filter for in the abstract
+average_abstract_length: 1250 # average length of the abstract
+max_num_pages: 100 # maximum number of papers to process
+
+#################### LLM EXTRACTION SETTINGS ####################
+model_type: "meta-llama/Meta-Llama-3-8B-Instruct" # Which model to use, options are "mistralai/Mistral-7B-Instruct-v0.2", "Nexusflow/Starling-LM-7B-beta" or "meta-llama/Meta-Llama-3-8B-Instruct"
+max_input_length: 50000 # Maximum input length for the LLM
+max_new_tokens: 400 # Maximum number of new tokens the model can generate
+
+use_fixed_input_length: false # We may want to use a fixed input length, to be able to fix the batch size and not do memory estimations
+fixed_input_length: 1000 # Fixed input length
+num_lines_per_model_call: 15 # Number of lines that each call to the LLM takes into account
+
+use_fewshot_prompting: true # Whether to use few-shot prompting
+quantize: false # Only do it if you have H100 GPUs
+device_map: "auto" # Device mapping for the model
+
+# If using a sampling strategy, the following parameters are used
+use_sample_generation_strategy: false 
+repetition_penalty: null
+temperature: null
+top_p: null
+
+#################### TRIPLET PROCESSING ####################
+max_length: 6 # The maximum length of subjects and objects in the triplets
+use_lemmatization: true # Whether to use lemmatization
+min_num_characters: 3 # The minimum number of characters a term has to have to be considered
+spacy_model: "en_core_web_lg" # Spacy model to use for preprocessing. Download it before (ex: python -m spacy download en_core_web_sm)
+
+# If there are multiple words in the predicate, we remove the "filler" verbs below
+filler_verbs: ["can", "will", "shall", "may", "could", "would", "should", "has", "are", "is", "have", "was", "were", "had", "do", "does", "did", "am", "be", "being", "been", "get", "got", "gets", "getting", "gotten", "make", "makes", "made", "making", "let", "lets", "letting", "let", "to", "must", "might", "having"]
+
+#################### TRIPLET FILTERING ####################
+refilter_triplets: false # Refilter the triplets, this means that everything is re-computed.
+
+# Frequency filtering
+min_num_appearances_for_frequency: 10 # If a term appears in less papers than this number, it is filtered out through frequency filtering
+
+# Bookcorpus filtering
+cutoff_bookcorpus: 0.1 # Remove the bottom cutoff_bookcorpus percent of the scores based on the bookcorpus (0.1 means terms with a score in the bottom 10% are removed)
+max_length_book: 30000 # All books will be truncated to have the first ... characters (1 page is ~1500 characters).
+threshold_bookcorpus_term_scores: 0.1 # The threshold for the term scores based on the bookcorpus/academic corpus. All terms with scores below this threshold are removed
+min_num_counts_term_in_single_book: 5
+min_num_paper_appearances_term_bookcorpus_scores: 5
+subset_book_corpus: 0.3 # If you want to use only a subset of the bookcorpus, put the fraction here. Otherwise put 1
+
+# Entropy filterings
+entropy_percentile_threshold: 0.85 # Terms with an entropy score above the entropy_percentile are filtered out
+
+#################### ENTROPY ####################s
+min_num_counts_term_in_single_paper: 5 # A term has to appear at least min_num_counts_term_in_single_paper times in a paper to be considered as "appearing" in the paper
+min_num_paper_appearances_term: 5 # A term has to appear in at least min_num_paper_appearances_term papers to be considered for the entropy calculation. An appearance is counted if the terms appears at least min_num_counts_term_in_single_paper times in the paper
+
+#################### TRIPLET ANALYSIS ####################
+n_max: 5 # The maximum n-gram length
+threshold_num_papers_ngrams: 5 # The minimum number of papers an n-gram has to appear in to be considered
+
+# Now we define our distance matrix for the n-gram overlap
+distance_matrix:
+  1: {1: 1, 2: 1, 3: 1, 4: Infinity, 5: Infinity, 6: Infinity, 7: Infinity}
+  2: {1: 1, 2: 2, 3: 2, 4: 2, 5: Infinity, 6: Infinity, 7: Infinity}
+  3: {1: 1, 2: 2, 3: 2, 4: 3, 5: 3, 6: 3, 7: Infinity}
+  4: {1: Infinity, 2: 2, 3: 3, 4: 3, 5: 3, 6: 3, 7: 3}
+  5: {1: Infinity, 2: Infinity, 3: 3, 4: 3, 5: 3, 6: 4, 7: 4}
+  6: {1: Infinity, 2: Infinity, 3: 3, 4: 3, 5: 4, 6: 4, 7: 4}
+  7: {1: Infinity, 2: Infinity, 3: Infinity, 4: 3, 5: 4, 6: 4, 7: 4}
+
+#################### PATENT PARSING ######################
+
+run_name_patent_parsing: '' # name to identify the run, results will be saved under results_run_name
+path_patent_xml_files: '' # path to patent XML files
+keywords_for_patent_filtering: [] # keywords to filter for
