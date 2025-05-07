@@ -5,7 +5,7 @@ os.environ["REGRESSION_TEST"] = "1"
 import sys
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(parent_dir)
-from helpers import logger, remove_folder
+from extraction.helpers import logger, remove_folder
 from contexts import GeneralContext, DataLoadingContext, TripletExtractionContext, TripletProcessingContext, TripletFilteringContext
 import pytest
 import subprocess
