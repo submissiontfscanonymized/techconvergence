@@ -7,7 +7,7 @@ path_texts_entropy_calculation: "" # If you have to calculate the entropy of ter
 path_raw_pdf: "data/data_regression_test" # path to the directory with the raw pdfs (the target papers or other documents), for the armasuisse cluster, you can set path_raw_pdf = get_paths_armasuisse_cluster(months, years), e.g. get_paths_armasuisse_cluster(['10'], ['21']) for October 2021
 path_fewshot_examples: "data/fewshot_examples/fewshotsamples_nlp.json" # Path to the few-shot examples, should already be correct if you did not move the file
 path_metadata: "data/arxiv-metadata-oai-snapshot.json" # path to the metadata, should be a .json file    
-path_memory_estimate: "data/memory_estimation_hevs/llama3_memory_estimate.json" # path to the memory estimation file
+path_memory_estimate: "data/memory_estimation/llama3_memory_estimate.json" # path to the memory estimation file
 num_cpus: 3
 
 #----------------------------------------------------------------------------------------
