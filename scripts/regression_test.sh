@@ -15,7 +15,10 @@ eval "$(conda shell.bash hook)"
 
 # Activate (local) env
 conda activate triplet_extraction
-
+export NUM_CPUS_DATA_LOADING=10
+export NUM_CPUS_PREPROCESSING=10
+export NUM_CPUS_TRIPLET_EXTRACTION=10
+export NUM_CPUS_TRIPLET_PROCESSING=10
 export REGRESSION_TEST=1
 
 # Run the regression test
