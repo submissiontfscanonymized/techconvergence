@@ -99,8 +99,9 @@ distance_matrix:
   6: {1: Infinity, 2: Infinity, 3: 3, 4: 3, 5: 4, 6: 4, 7: 4}
   7: {1: Infinity, 2: Infinity, 3: Infinity, 4: 3, 5: 4, 6: 4, 7: 4}
 
-#################### PATENT PARSING ######################
+#################### PATENT PARSING AND PROCESSING######################
 
 run_name_patent_parsing: '' # name to identify the run, results will be saved under results_run_name
 path_patent_xml_files: '' # path to patent XML files
 keywords_for_patent_filtering: [] # keywords to filter for
+keys_attribute_dict: ['publication_title', 'publication_number', 'publication_date', 'grant_date', 'application_type', 'application_status', 'patent_office', 'referential_documents', 'sections', 'section_classes', 'section_class_subclasses', 'section_class_subclass_groups']
