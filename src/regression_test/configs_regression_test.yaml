@@ -79,6 +79,7 @@ min_num_paper_appearances_term_bookcorpus_scores: 5
 subset_book_corpus: 0.3 # If you want to use only a subset of the bookcorpus, put the fraction here. Otherwise put 1
 
 # Entropy filterings
+use_entropy: true # Whether to use entropy filtering
 entropy_percentile_threshold: 0.85 # Terms with an entropy score above the entropy_percentile are filtered out
 
 #################### ENTROPY ####################s
