@@ -1,7 +1,7 @@
 """ Here all the context classes for the different steps of the pipeline are made """
 from pathlib import Path
 import pandas as pd
-from helpers import logger, remove_folder, get_paths_armasuisse_cluster
+from extraction_pipeline.helpers import logger, remove_folder, get_paths_armasuisse_cluster
 import json
 import pickle
 import os
