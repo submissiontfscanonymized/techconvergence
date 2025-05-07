@@ -1,4 +1,3 @@
-import os
 import logging
 import logging.handlers
 from pathlib import Path
@@ -6,7 +5,6 @@ import json
 import pickle
 import random
 import spacy
-from time import sleep
 from transformers import set_seed
 from spacy.tokenizer import Tokenizer
 from spacy.cli.download import download

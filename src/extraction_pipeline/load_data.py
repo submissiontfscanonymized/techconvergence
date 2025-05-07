@@ -1,14 +1,10 @@
 from helpers import logger, get_device, listener_configurer, listener_process, remove_folder
-import configs
 
-import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
 import fitz
 
 import pandas as pd
-from typing import Union
 
-from pathlib import Path
 import logging
 import random
 import nltk
@@ -16,7 +12,7 @@ import multiprocessing as mp
 import time
 import os
 import json
-from contexts import GeneralContext, DataLoadingContext
+from extraction_pipeline.contexts import GeneralContext, DataLoadingContext
 
 try: 
     nltk.data.find('tokenizers/punkt_tab')

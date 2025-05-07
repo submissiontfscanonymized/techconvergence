@@ -1,10 +1,7 @@
 import pickle
 import string
-import sys
-from pathlib import Path
 import multiprocessing as mp
 from collections import Counter
-import logging
 import numpy as np
 from datasets import load_dataset
 
@@ -12,8 +9,8 @@ import time
 import os
 import json
 
-from helpers import logger, listener_configurer, listener_process, load_spacy, lemmatize_text
-from contexts import GeneralContext, TripletFilteringContext, EntropyContext
+from extraction_pipeline.helpers import logger, listener_configurer, listener_process, load_spacy, lemmatize_text
+from extraction_pipeline.contexts import GeneralContext, TripletFilteringContext, EntropyContext
 mp.set_start_method('spawn', force=True)
 
 def get_words_from_subject_object(triplets):

@@ -3,8 +3,6 @@ import re
 import nltk
 import pickle
 import string
-import sys
-import logging
 import time
 import json
 import pandas as pd
@@ -13,8 +11,8 @@ import multiprocessing as mp
 from nltk.corpus import stopwords
 from collections import defaultdict
 
-from helpers import logger, listener_configurer, listener_process, load_spacy, check_spacy_installed
-from contexts import GeneralContext, TripletProcessingContext
+from extraction_pipeline.helpers import logger, listener_configurer, listener_process, load_spacy, check_spacy_installed
+from extraction_pipeline.contexts import GeneralContext, TripletProcessingContext
 mp.set_start_method('spawn', force=True)
 nltk.download('stopwords')
 

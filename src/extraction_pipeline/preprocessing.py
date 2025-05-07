@@ -1,7 +1,7 @@
-from helpers import logger, listener_process, listener_configurer
+from extraction_pipeline.helpers import logger, listener_process, listener_configurer
 from pathlib import Path
 
-from contexts import GeneralContext, DataLoadingContext
+from extraction_pipeline.contexts import GeneralContext, DataLoadingContext
 
 from abbreviations import schwartz_hearst
 
@@ -11,8 +11,6 @@ import os
 import re
 import time
 import json
-import tqdm
-import gc
 import multiprocessing as mp
 mp.set_start_method('spawn', force=True)
 
