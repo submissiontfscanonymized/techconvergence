@@ -1,32 +1,33 @@
 ## LLM-Resilient Bibliometrics: Factual Consistency Through Entity Triplet Extraction
 **Last update: 07.05.2025**
 
-This github repository provides the code that belongs to the project "Monitoring Transformative Technological Convergence Through LLM-Extracted Semantic Entity Triple Graph". The code provides the full pipeline from raw arXiv pdf's or raw patents to processed entity triplets of the shape (subject, predicate, object). The triplets are extracted through a LLM.
+This github repository provides the code that belongs to the project "Monitoring Transformative Technological Convergence Through LLM-Extracted Semantic Entity Triple Graph". The code provides the full pipeline from raw arXiv pdf's or raw patents to processed entity triples of the shape (subject, predicate, object). The triples are extracted through a LLM.
 
 ### Structure :books:
 
 -- **src** \
-&nbsp;&nbsp;&nbsp;&nbsp;|--- *analyses* \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- TBD \
 &nbsp;&nbsp;&nbsp;&nbsp;|--- *configs* \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```config_template.yaml```: In this file, you specify all the settings for the triplet extraction and processing. For more information and an overview of all parameters see the folder ```code_structure/parameters.pdf```  \
 &nbsp;&nbsp;&nbsp;&nbsp;|--- *extraction_pipeline* \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```contexts.py```: Here, the contexts classes are defined based on the user settings in the configuration file.  \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```helpers.py```: This file provides several helper functions, such as loggers, that are used throughout the pipeline. \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```estimation.py```: This file provides memory estimations for specific input sizes, such that the batch size can be set dynamically. \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```calculate_entropy.py```: This file provides the code for calculating the cross-categorical entropy, used for filtering the triplets. \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```calculate_entropy.py```: This file provides the code for calculating the cross-categorical entropy, used for filtering the triples. \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```load_data.py```: This file loads the pdf's and converts them to text files \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```preprocessing.py```: This file preprocesses the text files \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```extract_triplets_llm.py```: This file extracts the triplets from the text files using a LLM \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```process_triplets.py```: This file processes the triplets \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```filter_triplets.py```: This file filters the triplets, after which the triplets are finalized! \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```extract_triplets_llm.py```: This file extracts the triples from the text files using a LLM \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```process_triplets.py```: This file processes the triples \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```filter_triplets.py```: This file filters the triples, after which the triples are finalized! 
 
 -- **scripts** \
-&nbsp;&nbsp;&nbsp;&nbsp;|--- *general*  \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```install_anaconda.sh```: installing anaconda in your home directory in the cluster \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```create_environment.sh```: creating the conda environment that is used to run the code \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```pipeline_load_data.sh```: pipeline for running extraction with spaCy on cluster \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```pipeline_llm_cluster.sh```: pipeline for running extraction with LLMs on cluster \
+&nbsp;&nbsp;&nbsp;&nbsp;|--- *triplet_extraction*  \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- *pipeline* \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- *pipeline* \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```pipeline_load_data.sh```: This script loads the data.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```pipeline_preprocessing.sh```: This script preprocesses the data. \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```pipeline_extract_triplets.sh```: This script extracts the triples from the data. \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```pipeline_process_triplets.sh```: This script processes the triples. \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```run_full_pipeline.sh```: This script runs the full pipeline, from loading the data to filtering the triples. If you want to run parts of the pipeline, you can adapt the script accordingly.  \
 
 &nbsp;&nbsp;&nbsp;&nbsp;|--- *general* \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```download_arxiv_data.sh```: sample bash script to download arXiv papers from 2023. \
@@ -35,14 +36,12 @@ This github repository provides the code that belongs to the project "Monitoring
 
 &nbsp;&nbsp;&nbsp;&nbsp;|--- *patents* \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```parse_patents.sh```: Parse the raw XML patent files into text files. \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```process_patents.sh```: Select only those patents with the desired keywords. \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```process_patents.sh```: Select only those patents with the desired keywords. 
 
-\
 -- **code_structure** \
-&nbsp;&nbsp;&nbsp;&nbsp;|--- ```code_overview.pdf```: A schematic overview of the full pipeline.  \
-&nbsp;&nbsp;&nbsp;&nbsp;|--- ```parameter_description.pdf```: An overview and description of all parameters that can be set in ```configs.py``` \
+&nbsp;&nbsp;&nbsp;&nbsp;|--- ```code_overview.png```: A schematic overview of the full pipeline.  \
+&nbsp;&nbsp;&nbsp;&nbsp;|--- ```parameter_description.pdf```: An overview and description of all parameters that can be set in ```configs.py``` 
 
-\
 -- **data** \
 &nbsp;&nbsp;&nbsp;&nbsp;|--- *fewshot_examples*:  \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```fewshotsamples_nlp.json```: Fewshot examples for the domain of NLP. For new domains one will have to construct the examples themself and put them in this folder. \
@@ -54,11 +53,13 @@ This github repository provides the code that belongs to the project "Monitoring
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```entropy.pickle```: The cross-categorical entropy for each term. The values are based on a *control corpus* from the period 2015-2023, with 200 papers sampled per month.  \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```num_files_per_cat.pickle```: The total number of files for each arXiv category. The values are based on a *control corpus* from the period 2015-2023, with 200 papers sampled per month.  \
 &nbsp;&nbsp;&nbsp;&nbsp;|--- *target papers*: Here the user can put target papers that he or she wants.  \
+&nbsp;&nbsp;&nbsp;&nbsp;|--- *golden_dataset*:  \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--- ```golden_dataset.xlsx```: A manually constructed training dataset of semantic entity triples, from the paper [*A Survey
+of Large Language Models*](https://arxiv.org/pdf/2303.18223) 
 
-\
 -- ```requirements.txt```: File with environment requirements
 
-\
+
 
 
 ### Requirements :mag:
@@ -97,7 +98,7 @@ chmod +x nix-portable-x86_64
 Then, the data can be downloaded through Nix, an example script to download the data from 2023 is provided in the file ```scripts/general/download_arxiv_data.sh```.
 
 ### Usage of the code :memo:
-The code is designed for the extraction of triplets from arXiv papers. 
+The code is designed for the extraction of triples from arXiv papers. 
 
 #### Triplet extraction from arXiv papers
 
@@ -106,9 +107,9 @@ The code is designed for the extraction of triplets from arXiv papers.
 3. For the triplet filtering, one needs the term entropy. Here you have two options:
     1. Use the entropy based on the sampled arXiv papers from 2015-2023, this is provided in teh folder ```data/entropy```.
     2. Recalculate the entropy with a corpus of your choice, specify the path to the corpus in ```configs.py``` and recalculate the entropy using the file ```calculate_entropy.py```.
-4. Now define your set of _target papers_, which must be from arXiv, from which you want to extract triplets. Put these papers in a folder of your choice, for instance the folder ```data/target_papers``` .
+4. Now define your set of _target papers_, which must be from arXiv, from which you want to extract triples. Put these papers in a folder of your choice, for instance the folder ```data/target_papers``` .
 5. To get access to the Llama-3-8b model, fill in the form on [the huggingface page](https://huggingface.co/meta-llama/Meta-Llama-3-8B) . Next, create a huggingface access token by going to your settings and into the access tokens part. Then, create a ```.env``` file in your root folder, with ```HUGGINGFACE_TOKEN = your_huggingface_api_token```. 
-6. Now we are ready to start! Modify the settings as you like them in ```configs.py```. Note that - among others - you have to specify a folder to save the processed data, and a folder to save the results (e.g. triplets). We can then do the triplet extraction and comparison in the following steps:
+6. Now we are ready to start! Modify the settings as you like them in ```configs.py```. Note that - among others - you have to specify a folder to save the processed data, and a folder to save the results (e.g. triples). We can then do the triplet extraction and comparison in the following steps:
     1. Run the triplet extraction and processing. If we run it locally, we run ```scripts/local/pipeline_llm.sh``` or ```scripts/local/pipeline_spacy.sh```. If we run it on a cluster, we run ```scripts/cluster/pipeline_llm.sh``` or ```scripts/local/pipeline_spacy.sh```.
 
 #### Triplet extraction from patents
