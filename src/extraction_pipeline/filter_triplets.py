@@ -6,9 +6,12 @@ import numpy as np
 from datasets import load_dataset
 
 import time
-import os
-import json
 
+import json
+import sys
+import os
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.append(parent_dir)
 from extraction_pipeline.helpers import logger, listener_configurer, listener_process, load_spacy, lemmatize_text
 from extraction_pipeline.contexts import GeneralContext, TripletFilteringContext, EntropyContext
 mp.set_start_method('spawn', force=True)

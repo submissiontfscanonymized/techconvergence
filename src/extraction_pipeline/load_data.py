@@ -1,4 +1,9 @@
-from helpers import logger, get_device, listener_configurer, listener_process, remove_folder
+import sys
+import os
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.append(parent_dir)
+
+from extraction_pipeline.helpers import logger, get_device, listener_configurer, listener_process, remove_folder
 
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
 import fitz
@@ -10,7 +15,7 @@ import random
 import nltk
 import multiprocessing as mp
 import time
-import os
+
 import json
 from extraction_pipeline.contexts import GeneralContext, DataLoadingContext
 

@@ -6,11 +6,14 @@ import string
 import time
 import json
 import pandas as pd
-import os
+
 import multiprocessing as mp
 from nltk.corpus import stopwords
 from collections import defaultdict
-
+import sys
+import os
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.append(parent_dir)
 from extraction_pipeline.helpers import logger, listener_configurer, listener_process, load_spacy, check_spacy_installed
 from extraction_pipeline.contexts import GeneralContext, TripletProcessingContext
 mp.set_start_method('spawn', force=True)

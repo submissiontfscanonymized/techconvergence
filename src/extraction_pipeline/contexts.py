@@ -1,15 +1,17 @@
 """ Here all the context classes for the different steps of the pipeline are made """
 from pathlib import Path
 import pandas as pd
-from extraction_pipeline.helpers import logger, remove_folder, get_paths_armasuisse_cluster
-import json
-import pickle
 import os
 import sys
-import yaml
-
 src_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(src_dir)
+from extraction_pipeline.helpers import get_paths_armasuisse_cluster
+import json
+import pickle
+
+import yaml
+
+
 
 # CONFIGS path is an environment variable called CONFIG_FILE
 # print the environment variable
