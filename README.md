@@ -1,7 +1,7 @@
 ## LLM-Resilient Bibliometrics: Factual Consistency Through Entity Triplet Extraction
-**Last update: 07.05.2025**
+**Last update: 13.08.2025**
 
-This github repository provides the code that belongs to the project "Monitoring Transformative Technological Convergence Through LLM-Extracted Semantic Entity Triple Graph". The code provides the full pipeline from raw arXiv pdf's or raw patents to processed entity triples of the shape (subject, predicate, object). The triples are extracted through a LLM.
+This repository belongs to the Journal of Web Semantics (JoWS) submission of the article "Monitoring Transformative Technological Convergence Through LLM-Extracted Semantic Entity Triple Graph". The code provides the full pipeline from raw arXiv pdf's or raw patents to processed entity triples of the shape (subject, predicate, object). The triples are extracted through a LLM.
 
 ### Structure :books:
 
@@ -126,3 +126,4 @@ To assert whether the whole triplet extraction pipeline is functioning (for inst
 
 
 Good luck, and if you have feedback, do not hesitate to reach out!
+
